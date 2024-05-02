@@ -9,7 +9,42 @@ class Cache {
 private:
   // TODO: private inner struct/class 선언 가능
   // TODO: private 멤버 변수와 함수 추가 가능
+  int Ival;
+  double Dval;
+  int size;
+  
+  class Hash {
+    pritvate:
+      int hashSize = 100;
+      Cache* hashTable = new Cache[hashSize];
+    public:  
+      int hashFunc();
 
+  }
+  class Node{
+    public:
+      string key_;
+      double val;
+      Node* next;
+      Node(double d):val(d), next(NULL){}
+      double& getVal(){
+        return val;
+      }
+      Node* getNext(){
+        return next;
+      }
+      void setNext(Node* node){
+        next = node;
+      }
+  };
+  class LinkedList{
+    public:
+      Node* nodes; //pointing to the first node
+      int size;
+      LinkedList():size(0),nodes(NULL){};
+      void insert(double);
+      void printList();
+  };
 public:
   Cache();
   ~Cache();

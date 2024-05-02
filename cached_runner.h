@@ -7,7 +7,17 @@
 class CachedRunner {
 private:
   // TODO: private 멤버 변수와 함수 추가 가능
-
+  Cache* cache;
+  int hitCount = 0;
+  int missCount = 0;
+  bool isPalindrome(std::string str) {
+    for (int i = 0; i < str.size() / 2; i++) {
+      if (str[i] != str[str.size() - i - 1]) {
+        return false;
+      }
+    }
+    return true;
+  }
 public:
   CachedRunner(Cache &cache);
 

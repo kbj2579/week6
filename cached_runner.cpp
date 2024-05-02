@@ -1,3 +1,65 @@
 #include "cached_runner.h"
-
+#include <fstream>
+#include <iostream>
+#include <string>
 // TODO: 필요한 함수 구현
+  CachedRunner(Cache &cache){
+    this.cache = cache;
+  }
+
+  // 파일의 숫자를 전부 곱하여 반환한다
+  double multiply(std::string filename){
+    //캐시에 이 파일이 있다면 캐시에 있는값 리턴
+    
+    /////
+    
+    //캐시에 이 파일이 없다면 계산한후 리턴
+    std::ifstream file(filename);
+    double result = 1;
+    double number;
+    while (file >> number) {
+      result *= number;
+    }
+  }
+
+  // 파일에서 가장 긴 팰린드롬을 찾아 인덱스를 반환한다
+  int palindrome(std::string filename){
+    //캐시에 이 파일이 있다면 캐시에 있는값 리턴
+    
+    /////
+    
+    //캐시에 이 파일이 없다면 계산한후 리턴
+    std::ifstream file(filename);
+    std::string fullText;
+    std::string line;
+    while (std::getline(file, line)) {
+      fullText += line;
+    }
+
+    int maxLength = 0;
+    int maxIndex = 0;
+    std::string maxPalindrome;
+
+    for (int i = 0; i < fullText.size(); i++) {
+      for (int j = i + 1; j < fullText.size(); j++) {
+        std::string sub = fullText.substr(i, j - i + 1);
+        if (isPalindrome(sub) && sub.size() > maxLength) {
+          maxLength = sub.size();
+          maxIndex = i;
+          maxPalindrome = sub;
+        }
+      }
+    }
+
+    return maxIndex;
+  }
+
+  // 캐시에 히트한 횟수를 반환한다
+  int hits(){
+    return hitCount;
+  }
+
+  // 캐시에 미스한 횟수를 반환한다
+  int misses(){
+    return missCount;
+  }
