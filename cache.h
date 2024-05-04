@@ -5,46 +5,54 @@
 
 #define CACHE_SIZE 10
 
+using namespace std;
 class Cache {
 private:
   // TODO: private inner struct/class 선언 가능
   // TODO: private 멤버 변수와 함수 추가 가능
-  int Ival;
-  double Dval;
-  int size;
-  
-  class Hash {
-    pritvate:
-      int hashSize = 100;
-      Cache* hashTable = new Cache[hashSize];
-    public:  
-      int hashFunc();
-
-  }
   class Node{
-    public:
-      string key_;
-      double val;
-      Node* next;
-      Node(double d):val(d), next(NULL){}
-      double& getVal(){
-        return val;
-      }
-      Node* getNext(){
-        return next;
-      }
-      void setNext(Node* node){
-        next = node;
-      }
-  };
-  class LinkedList{
-    public:
-      Node* nodes; //pointing to the first node
-      int size;
-      LinkedList():size(0),nodes(NULL){};
-      void insert(double);
-      void printList();
-  };
+      private:
+
+      public:
+        int Ival_;
+        double Dval_;
+        bool isDouble = true;
+        string key_;
+        Node* prev;
+        Node* next;
+      
+        friend class DoubleLinkedList;
+        Node(string key, int i){
+          key_ = key;
+          Ival_ = i;
+          Dval_ = i;
+          next = nullptr;
+          isDouble = false;
+        };
+        Node(string key, double d){
+          key_ = key;
+          Ival_ = d;
+          Dval_ = d;
+          next = nullptr;
+          isDouble = true;
+        };
+    
+    };
+    class DoubleLinkedList{
+      public:
+        int size;
+        Node* head;
+        Node* tail;
+        DoubleLinkedList();
+        bool empty();
+        friend class Node;
+    };
+
+    int hashFunc(string key);
+    int hashSize = 100;
+    Node** hashTable;
+    DoubleLinkedList* list;
+
 public:
   Cache();
   ~Cache();
