@@ -8,13 +8,9 @@ using namespace std;
 // TODO: 필요한 함수 구현
     Cache::DoubleLinkedList::DoubleLinkedList(){
         size = 10;
-        head = new Cache::Node("", 0);
-        tail = new Cache::Node("", 0);
-        head->next = tail;
-        tail->prev = head;
     }
     Cache:: Cache(){
-        hashTable = new Node*[hashSize](); 
+        hashTable = new Node*[hashSize]; 
         list = new DoubleLinkedList();
         for (int i = 0; i < hashSize; ++i) {
             hashTable[i] = nullptr;
@@ -34,14 +30,13 @@ using namespace std;
         return sum%hashSize;
     }
 
- 
     void Cache::add(std::string key, int value){
         Cache::Node* newNode = new Cache::Node(key, value);
 
         // 캐시사이즈가 0인경우
         if(list->size == 0){
             list -> head -> next = newNode;
-            newNode -> prev = list->head;
+            newNode -> prev = list -> head;
             newNode -> next = list->tail;
             list->tail -> prev = newNode;
             list->size++;

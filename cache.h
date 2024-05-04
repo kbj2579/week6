@@ -41,10 +41,9 @@ private:
     class DoubleLinkedList{
       public:
         int size;
-        Node* head;
-        Node* tail;
+        Node* head = NULL;
+        Node* tail = NULL;
         DoubleLinkedList();
-        bool empty();
         friend class Node;
     };
 
